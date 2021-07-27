@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { Container, Grid, Paper, Typography, Button } from "@material-ui/core";
 import Input from "./Input";
+import { signIn, signUp } from "../../api";
 
 const initialFormData = {
   firstName: "",
@@ -14,6 +17,8 @@ const initialFormData = {
 const Auth = () => {
   const [wantSignUp, setWantSignUp] = useState(true);
   const [formData, setformData] = useState(initialFormData);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
@@ -27,6 +32,12 @@ const Auth = () => {
     e.preventDefault();
 
     console.log(formData);
+
+    if (wantSignUp) {
+      dispatch(signUp(formData, history));
+    } else {
+      dispatch(signIn(formData, history));
+    }
   };
 
   return (

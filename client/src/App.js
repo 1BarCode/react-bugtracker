@@ -5,7 +5,7 @@ import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
-const loggedIn = true;
+const loggedIn = false;
 
 const Dashboard = () => {
   return <div>You're at the Dashboard</div>;
@@ -23,6 +23,7 @@ const App = () => {
           {loggedIn ? <Redirect to="/dashboard" /> : <Auth />}
         </Route>
         <ProtectedRoute
+          exact
           path="/dashboard"
           redirectPath="/auth"
           loggedIn={loggedIn}

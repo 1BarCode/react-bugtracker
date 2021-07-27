@@ -3,9 +3,21 @@ import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ loggedIn, redirectPath, children, ...rest }) => {
   return (
-    <Route {...rest}>
-      {loggedIn ? children : <Redirect to={redirectPath} />}
-    </Route>
+    <Route
+      {...rest}
+      render={(props) => {
+        return loggedIn ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: redirectPath,
+              state: { from: props.location },
+            }}
+          />
+        );
+      }}
+    />
   );
 };
 
