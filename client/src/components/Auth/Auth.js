@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -15,7 +15,7 @@ const initialFormData = {
 };
 
 const Auth = () => {
-  const [wantSignUp, setWantSignUp] = useState(true);
+  const [wantSignUp, setWantSignUp] = useState(false);
   const [formData, setformData] = useState(initialFormData);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -30,8 +30,6 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(formData);
 
     if (wantSignUp) {
       dispatch(signup(formData, history));

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -9,43 +9,71 @@ import {
   List,
   ListItem,
   ListItemText,
-  makeStyles,
+  IconButton,
+  Menu,
+  MenuItem,
 } from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  toolbar: theme.mixins.toolbar,
-}));
+import useStyles from "./styles";
 
 const NavBar = ({ user, setUser }) => {
   const classes = useStyles();
   const location = useLocation();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   useEffect(() => {
     const token = user?.token;
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, []);
+  }, [location]);
+
+  const handleLogOut = () => {
+    dispatch({ type: "LOGOUT" });
+    history.push("/");
+    setUser(null);
+  };
+
+  const handleMenu = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const profileIconButton = (
+    <div>
+      <IconButton aria-haspopup="true" onClick={handleMenu} color="inherit">
+        <AccountCircle />
+      </IconButton>
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuItem>Profile</MenuItem>
+        <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+      </Menu>
+    </div>
+  );
 
   return (
     <div>
       <CssBaseline />
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <Typography>Logged in as: {user.result.name}</Typography>
+          <Typography>
+            Logged in as:
+            {/* {user.result.name} */}
+          </Typography>
+          {profileIconButton}
         </Toolbar>
       </AppBar>
       <Drawer

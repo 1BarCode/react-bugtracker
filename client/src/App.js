@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
@@ -10,23 +11,42 @@ const Dashboard = () => {
 };
 
 const App = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const loggedUser = useSelector((state) => state.auth.authData);
+  const userStorage = JSON.parse(localStorage.getItem("profile"));
+  const [user, setUser] = useState(userStorage);
+  const isAuth = loggedUser || Boolean(user);
+
+  // console.log(`user from redux: ${loggedUser}`);
+  // console.log(`user storage: ${userStorage}`);
+  // console.log(`user: ${user}`);
+  // console.log(`is auth: ${isAuth}`);
+
+  useEffect(() => {
+    setUser(userStorage);
+  }, []);
 
   return (
     <BrowserRouter>
-      {user ? <NavBar user={user} setUser={setUser} /> : null}
+      {isAuth ? <NavBar user={user} setUser={setUser} /> : null}
       <Switch>
-        <Route exact path="/">
-          {user ? <Redirect to="/dashboard" /> : <Redirect to="/auth" />}
-        </Route>
-        <Route exact path="/auth">
-          {user ? <Redirect to="/dashboard" /> : <Auth />}
-        </Route>
+        <ProtectedRoute exact path="/" redirectPath="/auth" loggedIn={isAuth}>
+          <Dashboard />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/auth"
+          redirectPath="/dashboard"
+          loggedIn={!isAuth}
+        >
+          <Auth />
+        </ProtectedRoute>
+
         <ProtectedRoute
           exact
           path="/dashboard"
           redirectPath="/auth"
-          loggedIn={user}
+          loggedIn={isAuth}
         >
           <Dashboard />
         </ProtectedRoute>
