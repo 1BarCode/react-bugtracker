@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-
-const Dashboard = () => {
-  return <div>You're at the Dashboard</div>;
-};
+import Dashboard from "./components/Pages/Dashboard/Dashboard";
 
 const App = () => {
   const loggedUser = useSelector((state) => state.auth.authData);

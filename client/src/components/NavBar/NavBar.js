@@ -53,8 +53,11 @@ const NavBar = ({ user, setUser }) => {
         <AccountCircle />
       </IconButton>
       <Menu
+        id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         open={open}
         onClose={handleClose}
       >
@@ -65,14 +68,11 @@ const NavBar = ({ user, setUser }) => {
   );
 
   return (
-    <div>
+    <div className={classes.root}>
       <CssBaseline />
-      <AppBar className={classes.appBar}>
+      <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
-          <Typography>
-            Logged in as:
-            {/* {user.result.name} */}
-          </Typography>
+          <Typography>Logged in as: {user?.result.name}</Typography>
           {profileIconButton}
         </Toolbar>
       </AppBar>
