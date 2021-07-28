@@ -1,32 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
-const loggedIn = false;
-
 const Dashboard = () => {
   return <div>You're at the Dashboard</div>;
 };
 
 const App = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   return (
     <BrowserRouter>
-      {loggedIn ? <NavBar /> : null}
+      {user ? <NavBar user={user} setUser={setUser} /> : null}
       <Switch>
         <Route exact path="/">
-          {loggedIn ? <Redirect to="/dashboard" /> : <Redirect to="/auth" />}
+          {user ? <Redirect to="/dashboard" /> : <Redirect to="/auth" />}
         </Route>
         <Route exact path="/auth">
-          {loggedIn ? <Redirect to="/dashboard" /> : <Auth />}
+          {user ? <Redirect to="/dashboard" /> : <Auth />}
         </Route>
         <ProtectedRoute
           exact
           path="/dashboard"
           redirectPath="/auth"
-          loggedIn={loggedIn}
+          loggedIn={user}
         >
           <Dashboard />
         </ProtectedRoute>

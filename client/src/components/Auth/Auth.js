@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { Container, Grid, Paper, Typography, Button } from "@material-ui/core";
 import Input from "./Input";
-import { signIn, signUp } from "../../api";
+import { signin, signup } from "../../redux/actions/auth";
 
 const initialFormData = {
   firstName: "",
@@ -34,9 +34,9 @@ const Auth = () => {
     console.log(formData);
 
     if (wantSignUp) {
-      dispatch(signUp(formData, history));
+      dispatch(signup(formData, history));
     } else {
-      dispatch(signIn(formData, history));
+      dispatch(signin(formData, history));
     }
   };
 

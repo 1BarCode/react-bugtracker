@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -11,6 +11,8 @@ import {
   ListItemText,
   makeStyles,
 } from "@material-ui/core";
+
+import { useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -29,15 +31,21 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-const NavBar = () => {
+const NavBar = ({ user, setUser }) => {
   const classes = useStyles();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = user?.token;
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, []);
 
   return (
     <div>
       <CssBaseline />
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <Typography>Logged in as:</Typography>
+          <Typography>Logged in as: {user.result.name}</Typography>
         </Toolbar>
       </AppBar>
       <Drawer
