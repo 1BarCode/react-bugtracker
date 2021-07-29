@@ -7,10 +7,11 @@ const Dashboard = () => {
   const classes = useStyles();
 
   return (
-    <main className={classes.content}>
-      <div className={classes.toolbar} />
-      <Typography>You're at the Dashboard</Typography>;
-    </main>
+    <div className={classes.divRoot}>
+      <main className={classes.content}>
+        <Typography>You're at the Dashboard</Typography>
+      </main>
+    </div>
   );
 };
 

@@ -18,4 +18,11 @@ export default makeStyles((theme) => ({
     width: drawerWidth,
   },
   toolbar: theme.mixins.toolbar,
+  profileButtonRoot: {
+    marginLeft: theme.spacing(90),
+  },
+  listItemRoot: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  },
 }));

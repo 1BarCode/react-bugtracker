@@ -3,8 +3,10 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Container, Grid, Paper, Typography, Button } from "@material-ui/core";
+
 import Input from "./Input";
 import { signin, signup } from "../../redux/actions/auth";
+import useStyles from "./styles";
 
 const initialFormData = {
   firstName: "",
@@ -15,6 +17,7 @@ const initialFormData = {
 };
 
 const Auth = () => {
+  const classes = useStyles();
   const [wantSignUp, setWantSignUp] = useState(false);
   const [formData, setformData] = useState(initialFormData);
   const history = useHistory();
@@ -39,10 +42,10 @@ const Auth = () => {
   };
 
   return (
-    <Container maxWidth="xs">
-      <Paper elevation={3}>
+    <Container component="main" maxWidth="xs">
+      <Paper className={classes.paper} elevation={3}>
         <Typography>{wantSignUp ? "Sign Up" : "Sign In"}</Typography>
-        <form onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {wantSignUp && (
               <>
@@ -80,7 +83,13 @@ const Auth = () => {
               />
             )}
           </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary">
+          <Button
+            className={classes.submit}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+          >
             {wantSignUp ? "Sign Up" : "Sign In"}
           </Button>
           {/* Google Login Button */}
