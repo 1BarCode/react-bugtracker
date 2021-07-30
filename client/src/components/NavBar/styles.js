@@ -19,7 +19,7 @@ export default makeStyles((theme) => ({
   },
   toolbar: theme.mixins.toolbar,
   profileButtonRoot: {
-    marginLeft: theme.spacing(90),
+    marginLeft: "auto",
   },
   listItemRoot: {
     paddingTop: theme.spacing(2),

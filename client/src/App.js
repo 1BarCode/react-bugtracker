@@ -6,6 +6,11 @@ import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Dashboard from "./components/Pages/Dashboard/Dashboard";
+import ManageRole from "./components/Pages/ManageRole/ManageRole";
+import ManageProjectUsers from "./components/Pages/ManageProjectUsers/ManageProjectUsers";
+import MyProjects from "./components/Pages/MyProjects/MyProjects";
+import MyTickets from "./components/Pages/MyTickets/MyTickets";
+import Profile from "./components/Pages/Profile/Profile";
 
 const App = () => {
   const loggedUser = useSelector((state) => state.auth.authData);
@@ -46,6 +51,51 @@ const App = () => {
           loggedIn={isAuth}
         >
           <Dashboard />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/roles"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <ManageRole />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/users"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <ManageProjectUsers />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/myprojects"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <MyProjects />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/mytickets"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <MyTickets />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/profile"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <Profile />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

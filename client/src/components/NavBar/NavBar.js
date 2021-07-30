@@ -85,7 +85,7 @@ const NavBar = ({ user, setUser }) => {
   const drawerButtons = [
     { title: "Dashboard Home", icon: "HomeIcon" },
     { title: "Manage Role", icon: "AssignmentIndIcon" },
-    { title: "Manage Users", icon: "GroupAddIcon" },
+    { title: "Project Users", icon: "GroupAddIcon" },
     { title: "My Projects", icon: "ListIcon" },
     { title: "My Tickets", icon: "AssignmentIcon" },
     { title: "User Profile", icon: "PersonIcon" },
@@ -99,9 +99,9 @@ const NavBar = ({ user, setUser }) => {
           : button.icon === "GroupAddIcon"
           ? () => history.push("/users")
           : button.icon === "ListIcon"
-          ? () => history.push("/projects")
+          ? () => history.push("/myprojects")
           : button.icon === "AssignmentIcon"
-          ? () => history.push("/tickets")
+          ? () => history.push("/mytickets")
           : () => history.push("/profile")
       }
       button

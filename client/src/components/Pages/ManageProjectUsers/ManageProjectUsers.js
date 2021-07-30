@@ -1,18 +1,18 @@
 import React from "react";
-import { Typography, Container } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 import useStyles from "./styles";
 
-const Dashboard = () => {
+const ManageProjectUsers = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.divRoot}>
       <Container className={classes.content}>
-        <Typography>You're at the Dashboard</Typography>
+        Manage Project Users Page
       </Container>
     </div>
   );
 };
 
-export default Dashboard;
+export default ManageProjectUsers;
