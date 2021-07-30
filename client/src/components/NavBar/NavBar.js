@@ -16,10 +16,11 @@ import {
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import HomeIcon from "@material-ui/icons/Home";
-import ListIcon from "@material-ui/icons/List";
+// import HomeIcon from "@material-ui/icons/Home";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 
 import { useDispatch } from "react-redux";
@@ -35,6 +36,11 @@ const NavBar = ({ user, setUser }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [selectedItemLoc, setSelectedItemLoc] = useState(location.pathname);
+
+  const handleListItemClick = (e, pathname) => {
+    setSelectedItemLoc(pathname);
+  };
 
   useEffect(() => {
     const token = user?.token;
@@ -83,42 +89,73 @@ const NavBar = ({ user, setUser }) => {
   );
 
   const drawerButtons = [
-    { title: "Dashboard Home", icon: "HomeIcon" },
+    { title: "Dashboard", icon: "DashboardIcon" },
     { title: "Manage Role", icon: "AssignmentIndIcon" },
     { title: "Project Users", icon: "GroupAddIcon" },
-    { title: "My Projects", icon: "ListIcon" },
-    { title: "My Tickets", icon: "AssignmentIcon" },
+    { title: "My Projects", icon: "AssignmentIcon" },
+    { title: "My Tickets", icon: "ConfirmationNumberIcon" },
     { title: "User Profile", icon: "PersonIcon" },
   ].map((button) => (
     <ListItem
-      onClick={
-        button.icon === "HomeIcon"
-          ? () => history.push("/dashboard")
+      selected={
+        button.icon === "DashboardIcon"
+          ? selectedItemLoc === "/dashboard"
           : button.icon === "AssignmentIndIcon"
-          ? () => history.push("/roles")
+          ? selectedItemLoc === "/roles"
           : button.icon === "GroupAddIcon"
-          ? () => history.push("/users")
-          : button.icon === "ListIcon"
-          ? () => history.push("/myprojects")
+          ? selectedItemLoc === "/users"
           : button.icon === "AssignmentIcon"
-          ? () => history.push("/mytickets")
-          : () => history.push("/profile")
+          ? selectedItemLoc === "/myprojects"
+          : button.icon === "ConfirmationNumberIcon"
+          ? selectedItemLoc === "/mytickets"
+          : selectedItemLoc === "/profile"
+      }
+      onClick={
+        button.icon === "DashboardIcon"
+          ? (e) => {
+              handleListItemClick(e, "/dashboard");
+              history.push("/dashboard");
+            }
+          : button.icon === "AssignmentIndIcon"
+          ? (e) => {
+              handleListItemClick(e, "/roles");
+              history.push("/roles");
+            }
+          : button.icon === "GroupAddIcon"
+          ? (e) => {
+              handleListItemClick(e, "/users");
+              history.push("/users");
+            }
+          : button.icon === "AssignmentIcon"
+          ? (e) => {
+              handleListItemClick(e, "/myprojects");
+              history.push("/myprojects");
+            }
+          : button.icon === "ConfirmationNumberIcon"
+          ? (e) => {
+              handleListItemClick(e, "/mytickets");
+              history.push("/mytickets");
+            }
+          : (e) => {
+              handleListItemClick(e, "/profile");
+              history.push("/profile");
+            }
       }
       button
       key={button.title}
       classes={{ root: classes.listItemRoot }}
     >
       <ListItemIcon>
-        {button.icon === "HomeIcon" ? (
-          <HomeIcon fontSize="large" />
+        {button.icon === "DashboardIcon" ? (
+          <DashboardIcon fontSize="large" />
         ) : button.icon === "AssignmentIndIcon" ? (
           <AssignmentIndIcon fontSize="large" />
         ) : button.icon === "GroupAddIcon" ? (
           <GroupAddIcon fontSize="large" />
-        ) : button.icon === "ListIcon" ? (
-          <ListIcon fontSize="large" />
         ) : button.icon === "AssignmentIcon" ? (
           <AssignmentIcon fontSize="large" />
+        ) : button.icon === "ConfirmationNumberIcon" ? (
+          <ConfirmationNumberIcon fontSize="large" />
         ) : (
           <PersonIcon fontSize="large" />
         )}
@@ -147,11 +184,7 @@ const NavBar = ({ user, setUser }) => {
       >
         <div className={classes.toolbar} />
         <Divider />
-        <List>
-          {/* <ListItemIcon></ListItemIcon>
-            <ListItemText>DashBoard Home</ListItemText> */}
-          {drawerButtons}
-        </List>
+        <List>{drawerButtons}</List>
       </Drawer>
     </div>
   );
