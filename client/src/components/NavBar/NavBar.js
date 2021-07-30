@@ -13,6 +13,9 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Card,
+  CardHeader,
+  Avatar,
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import AssignmentIcon from "@material-ui/icons/Assignment";
@@ -44,6 +47,7 @@ const NavBar = ({ user, setUser }) => {
 
   useEffect(() => {
     const token = user?.token;
+    setSelectedItemLoc(location.pathname);
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
@@ -182,7 +186,14 @@ const NavBar = ({ user, setUser }) => {
         anchor="left"
         classes={{ paper: classes.drawerPaper }}
       >
-        <div className={classes.toolbar} />
+        {/* <div className={classes.toolbar} /> */}
+        <Card square elevation={0}>
+          <CardHeader
+            avatar={<Avatar>{user?.result.name.split("")[0]}</Avatar>}
+            title="WELCOME"
+            subheader={user?.result.name}
+          />
+        </Card>
         <Divider />
         <List>{drawerButtons}</List>
       </Drawer>

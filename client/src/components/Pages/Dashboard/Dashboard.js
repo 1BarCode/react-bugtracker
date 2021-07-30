@@ -44,7 +44,9 @@ const Dashboard = () => {
                 data={graph1Data}
                 options={{
                   maintainAspectRatio: true,
-                  scales: { y: { beginAtZero: true } },
+                  scales: {
+                    y: { beginAtZero: true },
+                  },
                   plugins: {
                     title: {
                       display: true,
