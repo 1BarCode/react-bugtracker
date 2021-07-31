@@ -11,4 +11,10 @@ export default makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
+  paper: {
+    width: "100%",
+  },
+  tableContainer: {
+    haxHeight: 440,
+  },
 }));
