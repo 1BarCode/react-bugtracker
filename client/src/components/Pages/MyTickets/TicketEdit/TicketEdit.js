@@ -1,6 +1,7 @@
 import React from "react";
-import { Container, Paper } from "@material-ui/core";
+import { Container, Paper, Grid } from "@material-ui/core";
 
+import Input from "../../../Auth/Input";
 import useStyles from "./styles";
 
 const TicketEdit = () => {
@@ -9,7 +10,11 @@ const TicketEdit = () => {
   return (
     <div className={classes.divRoot}>
       <Container className={classes.content}>
-        <Paper></Paper>
+        <Paper>
+          <Grid container spacing={2}>
+            <Input />
+          </Grid>
+        </Paper>
       </Container>
     </div>
   );
