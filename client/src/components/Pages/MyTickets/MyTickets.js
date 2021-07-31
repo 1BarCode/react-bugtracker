@@ -10,7 +10,11 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  Link,
+  List,
+  ListItem,
 } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 
 import useStyles from "./styles";
 
@@ -36,19 +40,22 @@ const MyTickets = () => {
     { id: "ticketStatus", label: "Ticket Status", minWidth: 30 },
     { id: "ticketType", label: "Ticket Type", minWidth: 50 },
     { id: "created", label: "Created", minWidth: 120 },
-    { id: "action", label: "Action", minWidth: 100 },
+    { id: "action", label: "Action", minWidth: 150 },
   ];
 
   const createData = (
+    id,
     title,
     projectName,
     assignedDeveloper,
     ticketPriority,
     ticketStatus,
     ticketType,
-    created
+    created,
+    action
   ) => {
     return {
+      id,
       title,
       projectName,
       assignedDeveloper,
@@ -56,27 +63,32 @@ const MyTickets = () => {
       ticketStatus,
       ticketType,
       created,
+      action,
     };
   };
 
   const rows = [
     createData(
+      1,
       "Pop-up Issue",
       "Bug Tracker",
       "jon wick",
       "Low",
       "Open",
       "Bug",
-      "7-30-2021"
+      "7-30-2021",
+      { Edit: "Edit/Assign", Details: "Details" }
     ),
     createData(
+      2,
       "Closing Issue",
       "Bug Tracker",
       "jon wick",
       "High",
       "Open",
       "Ticket",
-      "7-30-2021"
+      "7-30-2021",
+      { Edit: "Edit/Assign", Details: "Details" }
     ),
   ];
 
@@ -100,10 +112,25 @@ const MyTickets = () => {
         <TableCell>{row.ticketStatus}</TableCell>
         <TableCell>{row.ticketType}</TableCell>
         <TableCell>{row.created}</TableCell>
-        <TableCell>{row.action}</TableCell>
+        <TableCell>
+          <List>
+            <ListItem disableGutters>
+              <Link component={RouterLink} to={`/myticket/edit/${row.id}`}>
+                {row.action.Edit}
+              </Link>
+            </ListItem>
+            <ListItem disableGutters>
+              <Link component={RouterLink} to={`/myticket/detail/${row.id}`}>
+                {row.action.Details}
+              </Link>
+            </ListItem>
+          </List>
+        </TableCell>
       </TableRow>
     );
   });
+
+  console.log(rows);
 
   return (
     <div className={classes.divRoot}>
