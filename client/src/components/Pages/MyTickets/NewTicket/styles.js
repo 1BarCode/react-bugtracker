@@ -12,12 +12,6 @@ export default makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   paper: {
-    width: "100%",
-  },
-  tableContainer: {
-    haxHeight: 440,
-  },
-  buttonRoot: {
-    marginBottom: theme.spacing(2),
+    padding: theme.spacing(3),
   },
 }));

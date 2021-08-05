@@ -13,13 +13,15 @@ import {
   Link,
   List,
   ListItem,
+  Button,
 } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 
 import useStyles from "./styles";
 
 const MyTickets = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -135,6 +137,15 @@ const MyTickets = () => {
   return (
     <div className={classes.divRoot}>
       <Container className={classes.content}>
+        <Button
+          classes={{ root: classes.buttonRoot }}
+          style={{ textTransform: "none" }}
+          variant="contained"
+          color="primary"
+          onClick={() => history.push("/ticket/new")}
+        >
+          <Typography>New Ticket</Typography>
+        </Button>
         <Paper className={classes.paper}>
           <TableContainer className={classes.tableContainer}>
             <Table stickyHeader aria-label="My Tickets">

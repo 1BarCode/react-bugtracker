@@ -11,6 +11,7 @@ import ManageProjectUsers from "./components/Pages/ManageProjectUsers/ManageProj
 import MyProjects from "./components/Pages/MyProjects/MyProjects";
 import MyTickets from "./components/Pages/MyTickets/MyTickets";
 import Profile from "./components/Pages/Profile/Profile";
+import NewTicket from "./components/Pages/MyTickets/NewTicket/NewTicket";
 
 const App = () => {
   const loggedUser = useSelector((state) => state.auth.authData);
@@ -87,6 +88,15 @@ const App = () => {
           loggedIn={isAuth}
         >
           <MyTickets />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/ticket/new"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <NewTicket />
         </ProtectedRoute>
 
         <ProtectedRoute
