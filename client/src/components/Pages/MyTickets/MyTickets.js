@@ -146,7 +146,7 @@ const MyTickets = () => {
         >
           <Typography>New Ticket</Typography>
         </Button>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={5}>
           <TableContainer className={classes.tableContainer}>
             <Table stickyHeader aria-label="My Tickets">
               <TableHead>

@@ -39,7 +39,7 @@ const Dashboard = () => {
       <Container className={classes.content}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} md={6}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={5}>
               <Bar
                 data={graph1Data}
                 options={{
@@ -62,7 +62,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={5}>
               <Line
                 data={graph1Data}
                 options={{
@@ -83,7 +83,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={5}>
               <Line
                 data={graph1Data}
                 options={{
@@ -104,7 +104,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={5}>
               <Bar
                 data={graph1Data}
                 options={{
