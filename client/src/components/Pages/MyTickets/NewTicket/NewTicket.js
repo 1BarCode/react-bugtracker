@@ -12,22 +12,27 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import FileBase64 from "react-file-base64";
+import { useDispatch } from "react-redux";
+import { createTicket } from "../../../../redux/actions/tickets";
 
 import Input from "../../../Auth/Input";
 import useStyles from "./styles";
 
 const initialTicketData = {
   title: "",
-  project: "",
+  project: null,
   priority: "",
   status: "",
   type: "",
   description: "",
+  file: "",
 };
 
 const NewTicket = () => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [ticketData, setTicketData] = useState(initialTicketData);
 
   const handleChange = (e) => {
@@ -37,10 +42,24 @@ const NewTicket = () => {
     }));
   };
 
+  const clear = () => {
+    setTicketData(initialTicketData);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createTicket({ ...ticketData }));
+    console.log(ticketData);
+    clear();
+    history.push("/mytickets");
+  };
+
   const handleCancel = () => {
     setTicketData(initialTicketData);
     history.push("/mytickets");
   };
+
+  const blank = null;
 
   return (
     <div className={classes.divRoot}>
@@ -49,7 +68,7 @@ const NewTicket = () => {
           <Typography variant="h6" className={classes.pageTitle}>
             Create A New Ticket
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
@@ -73,7 +92,7 @@ const NewTicket = () => {
                     value={ticketData.project}
                     onChange={handleChange}
                   >
-                    <MenuItem value="None">
+                    <MenuItem value={blank}>
                       <em>None</em>
                     </MenuItem>
                     <MenuItem value="Project 1">Project 1</MenuItem>
@@ -149,12 +168,23 @@ const NewTicket = () => {
                 <TextField
                   name="description"
                   label="Description"
+                  value={ticketData.description}
                   onChange={handleChange}
                   multiline
                   rows={5}
                   fullWidth
                   variant="outlined"
                 />
+                <div className={classes.fileBase}>
+                  <label>Attach a File: </label>
+                  <FileBase64
+                    type="file"
+                    multiple={false}
+                    onDone={(base64) =>
+                      setTicketData({ ...ticketData, file: base64.base64 })
+                    }
+                  />
+                </div>
                 <Button
                   type="submit"
                   className={classes.submit}

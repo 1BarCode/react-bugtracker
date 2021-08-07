@@ -28,12 +28,16 @@ export default makeStyles((theme) => ({
     padding: theme.spacing(1, 0, 1, 0),
   },
   submit: {
-    margin: theme.spacing(3, 0, 1),
+    margin: theme.spacing(2, 0, 1),
   },
   cancel: {
     margin: theme.spacing(1, 0, 2),
   },
   pageTitle: {
     margin: theme.spacing(0, 0, 3),
+  },
+  fileBase: {
+    width: "100%",
+    margin: theme.spacing(1, 0, 1, 0),
   },
 }));
