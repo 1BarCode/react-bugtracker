@@ -16,7 +16,6 @@ import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { createTicket } from "../../../../redux/actions/tickets";
 
-import Input from "../../../Auth/Input";
 import useStyles from "./styles";
 
 const initialTicketData = {
@@ -49,7 +48,6 @@ const NewTicket = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createTicket({ ...ticketData }));
-    console.log(ticketData);
     clear();
     history.push("/mytickets");
   };

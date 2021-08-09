@@ -1,6 +1,6 @@
 import { CREATE } from "../constants/actionTypes";
 
-export default (tickets = [], action) => {
+const ticketReducer = (tickets = [], action) => {
   switch (action.type) {
     case CREATE:
       return [...tickets, action.payload];
@@ -8,3 +8,5 @@ export default (tickets = [], action) => {
       return tickets;
   }
 };
+
+export default ticketReducer;

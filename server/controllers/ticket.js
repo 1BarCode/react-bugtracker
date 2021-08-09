@@ -5,8 +5,6 @@ export const getTickets = async (req, res) => {
   try {
     const tickets = await Ticket.find();
 
-    console.log(tickets);
-
     res.status(202).json(tickets);
   } catch (error) {
     res.status(404).json({ message: error.message });
