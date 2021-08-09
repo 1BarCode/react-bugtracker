@@ -27,6 +27,8 @@ const MyTickets = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const fetchedTickets = useSelector((state) => state.tickets);
+  const [cachedTickets, setCachedTickets] = useState(null);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -47,11 +49,6 @@ const MyTickets = () => {
     { id: "created", label: "Created", minWidth: 120 },
     { id: "action", label: "Action", minWidth: 150 },
   ];
-
-  // FETCH Tickets when visiting route
-  useEffect(() => {
-    dispatch(getTickets);
-  }, []);
 
   const createData = (
     id,
@@ -76,6 +73,27 @@ const MyTickets = () => {
       action,
     };
   };
+
+  // FETCH Tickets when visiting route
+  useEffect(() => {
+    const loadTickets = async () => {
+      await dispatch(getTickets());
+      setCachedTickets(fetchedTickets);
+    };
+    loadTickets();
+  }, [dispatch]);
+  // console.log(`fetched tickets: ${fetchedTickets}`);
+  // console.log(`cached tickets: ${cachedTickets}`);
+  // console.log(typeof cachedTickets);
+  if (cachedTickets) {
+    console.log(cachedTickets[0].assignedDevelopers);
+  }
+
+  // const logArr = () => {
+  //   [cachedTickets].map((ticket) => console.log(ticket.assignedDevelopers));
+  // };
+
+  // logArr();
 
   const rows = [
     createData(
@@ -140,7 +158,7 @@ const MyTickets = () => {
     );
   });
 
-  console.log(rows);
+  // console.log(rows);
 
   return (
     <div className={classes.divRoot}>
