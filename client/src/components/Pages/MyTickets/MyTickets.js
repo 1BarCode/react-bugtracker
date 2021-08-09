@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Paper,
@@ -16,12 +16,15 @@ import {
   Button,
 } from "@material-ui/core";
 import { Link as RouterLink, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import useStyles from "./styles";
+import { getTickets } from "../../../redux/actions/tickets";
 
 const MyTickets = () => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -44,6 +47,11 @@ const MyTickets = () => {
     { id: "created", label: "Created", minWidth: 120 },
     { id: "action", label: "Action", minWidth: 150 },
   ];
+
+  // FETCH Tickets when visiting route
+  useEffect(() => {
+    dispatch(getTickets);
+  }, []);
 
   const createData = (
     id,
