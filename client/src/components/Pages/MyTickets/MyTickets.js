@@ -22,7 +22,7 @@ import moment from "moment";
 import useStyles from "./styles";
 import { getTickets } from "../../../redux/actions/tickets";
 
-const MyTickets = () => {
+const MyTickets = ({ user }) => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -80,22 +80,23 @@ const MyTickets = () => {
       await dispatch(getTickets());
     };
     loadTickets();
-  }, [dispatch]);
+  }, []);
 
-  const rowsArr = fetchedTickets.map((ticket) => {
-    const formattedTicket = createData(
-      ticket._id,
-      ticket.title,
-      ticket.assignedDevelopers[0],
-      ticket.priority,
-      ticket.status,
-      ticket.type,
-      ticket.createdAt,
-      { Edit: "Edit/Assign", Details: "Details" }
-    );
-    // console.log(moment(ticket.createdAt).startOf("day").fromNow());
-    return formattedTicket;
-  });
+  const rowsArr = fetchedTickets
+    .filter((ticket) => ticket.assignedDevelopers[0] === user.result._id)
+    .map((ticket) => {
+      const formattedTicket = createData(
+        ticket._id,
+        ticket.title,
+        ticket.assignedDevelopers[0],
+        ticket.priority,
+        ticket.status,
+        ticket.type,
+        ticket.createdAt,
+        { Edit: "Edit/Assign", Details: "Details" }
+      );
+      return formattedTicket;
+    });
   // const rows = [
   //   createData(
   //     1,
@@ -132,13 +133,14 @@ const MyTickets = () => {
   ));
 
   const renderTableBody = rowsArr
+    .reverse()
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     .map((row) => {
       return (
         <TableRow key={row.id}>
           <TableCell>{row.title}</TableCell>
           {/* <TableCell>{row.projectName}</TableCell> */}
-          <TableCell>{row.assignedDeveloper}</TableCell>
+          <TableCell>{user.result.name}</TableCell>
           <TableCell>{row.ticketPriority}</TableCell>
           <TableCell>{row.ticketStatus}</TableCell>
           <TableCell>{row.ticketType}</TableCell>
@@ -148,12 +150,12 @@ const MyTickets = () => {
           <TableCell>
             <List>
               <ListItem disableGutters>
-                <Link component={RouterLink} to={`/myticket/edit/${row.id}`}>
+                <Link component={RouterLink} to={`/ticket/edit/${row.id}`}>
                   {row.action.Edit}
                 </Link>
               </ListItem>
               <ListItem disableGutters>
-                <Link component={RouterLink} to={`/myticket/detail/${row.id}`}>
+                <Link component={RouterLink} to={`/ticket/detail/${row.id}`}>
                   {row.action.Details}
                 </Link>
               </ListItem>
@@ -162,7 +164,6 @@ const MyTickets = () => {
         </TableRow>
       );
     });
-  console.log(renderTableBody.length);
 
   return (
     <div className={classes.divRoot}>
@@ -188,7 +189,7 @@ const MyTickets = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 15]}
             component="div"
-            count={renderTableBody.length}
+            count={rowsArr.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

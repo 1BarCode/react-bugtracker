@@ -20,7 +20,6 @@ import useStyles from "./styles";
 
 const initialTicketData = {
   title: "",
-  project: null,
   priority: "",
   status: "",
   type: "",
@@ -57,7 +56,7 @@ const NewTicket = () => {
     history.push("/mytickets");
   };
 
-  const blank = null;
+  // const blank = null;
 
   return (
     <div className={classes.divRoot}>
@@ -77,7 +76,7 @@ const NewTicket = () => {
                   variant="outlined"
                   fullWidth
                 />
-                <FormControl
+                {/* <FormControl
                   fullWidth
                   variant="outlined"
                   className={classes.formControl}
@@ -97,7 +96,7 @@ const NewTicket = () => {
                     <MenuItem value="Project 2">Project 2</MenuItem>
                     <MenuItem value="Project 3">Project 3</MenuItem>
                   </Select>
-                </FormControl>
+                </FormControl> */}
                 <FormControl
                   fullWidth
                   variant="outlined"
