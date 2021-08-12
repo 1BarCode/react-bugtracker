@@ -44,9 +44,9 @@ const NewTicket = () => {
     setTicketData(initialTicketData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createTicket({ ...ticketData }));
+    await dispatch(createTicket({ ...ticketData }));
     clear();
     history.push("/mytickets");
   };

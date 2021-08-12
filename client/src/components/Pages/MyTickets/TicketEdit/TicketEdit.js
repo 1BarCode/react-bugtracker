@@ -68,10 +68,10 @@ const TicketEdit = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(ticketData);
-    dispatch(updateTicket(_id, { ...ticketData }));
+    await dispatch(updateTicket(_id, { ...ticketData }));
     clear();
     history.push("/mytickets");
   };
