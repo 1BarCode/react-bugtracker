@@ -1,10 +1,19 @@
 import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // uses LocalStorage
+
 import auth from "./auth";
 import tickets from "./tickets";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   auth,
   tickets,
 });
 
-export default rootReducer;
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["auth", "tickets"],
+};
+
+export const persistedReducer = persistReducer(persistConfig, rootReducer);
