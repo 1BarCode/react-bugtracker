@@ -80,7 +80,7 @@ const MyTickets = ({ user }) => {
       await dispatch(getTickets());
     };
     loadTickets();
-  }, []);
+  }, [dispatch]);
 
   const rowsArr = fetchedTickets
     .filter((ticket) => ticket.assignedDevelopers[0] === user.result._id)

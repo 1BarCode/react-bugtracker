@@ -13,6 +13,7 @@ import MyTickets from "./components/Pages/MyTickets/MyTickets";
 import Profile from "./components/Pages/Profile/Profile";
 import NewTicket from "./components/Pages/MyTickets/NewTicket/NewTicket";
 import TicketEdit from "./components/Pages/MyTickets/TicketEdit/TicketEdit";
+import TicketDetail from "./components/Pages/MyTickets/TicketDetail/TicketDetail";
 
 const App = () => {
   const loggedUser = useSelector((state) => state.auth.authData);
@@ -107,6 +108,15 @@ const App = () => {
           loggedIn={isAuth}
         >
           <TicketEdit />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/ticket/detail/:id"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <TicketDetail />
         </ProtectedRoute>
 
         <ProtectedRoute

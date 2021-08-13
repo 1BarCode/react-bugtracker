@@ -15,7 +15,7 @@ export default makeStyles((theme) => ({
     width: "100%",
   },
   tableContainer: {
-    haxHeight: 440,
+    maxHeight: 440,
   },
   buttonRoot: {
     marginBottom: theme.spacing(2),

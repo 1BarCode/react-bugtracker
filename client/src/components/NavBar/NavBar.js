@@ -46,7 +46,7 @@ const NavBar = ({ user, setUser }) => {
   };
 
   useEffect(() => {
-    const token = user?.token;
+    // const token = user?.token;
     setSelectedItemLoc(location.pathname);
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);

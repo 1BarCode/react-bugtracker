@@ -70,7 +70,6 @@ const TicketEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(ticketData);
     await dispatch(updateTicket(_id, { ...ticketData }));
     clear();
     history.push("/mytickets");
@@ -92,7 +91,7 @@ const TicketEdit = () => {
       <Container className={classes.content}>
         <Paper className={classes.paper}>
           <Typography variant="h6" className={classes.pageTitle}>
-            Edit Ticket
+            <strong>Edit Ticket</strong>
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
