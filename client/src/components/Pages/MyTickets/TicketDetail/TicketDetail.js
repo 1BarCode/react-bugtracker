@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Paper,
@@ -20,42 +20,31 @@ const TicketDetail = () => {
   const { id: _id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const [oneTicket, setOneTicket] = useState(null);
 
-  //   useSelector((state) =>
-  //     state.tickets.filter((ticket) => (_id ? ticket._id === _id : null))
-  //   )
-
-  //   const assignedDevName = [...assignedDevelopersArr].map((dev) => dev.name);
-  //   console.log(assignedDevName);
-
-  //   const renderAssignedDev = assignedDevelopersArr.map();
   const ticket = useSelector((state) =>
     state.tickets.filter((ticket) => (_id ? ticket._id === _id : null))
   );
 
-  const assignedDevelopersArr = ticket[0]?.assignedDevelopers.map(
-    (dev) => dev.name
-  );
-  console.log(assignedDevelopersArr);
-  console.log(oneTicket);
+  const assignedDevelopersArr = useSelector((state) =>
+    state.tickets.filter((ticket) => (_id ? ticket._id === _id : null))
+  )[0].assignedDevelopers;
+
+  const assignedDevName = [...assignedDevelopersArr].map((dev) => dev.name);
+  //   console.log(assignedDevName);
+
+  //   const renderAssignedDev = assignedDevelopersArr.map();
+  //   console.log(assignedDevelopersArr);
 
   useEffect(() => {
     const fetchOneTicket = async () => {
       await dispatch(getOneTicket(_id));
-      if (ticket) {
-        setOneTicket(ticket);
-      }
     };
     fetchOneTicket();
   }, []);
 
-  console.log(ticket);
+  //   console.log(ticket);
   //   console.log(_id);
 
-  if (!ticket) {
-    return <div>loading</div>;
-  }
   return (
     <div className={classes.divRoot}>
       <Container className={classes.content}>
@@ -79,7 +68,7 @@ const TicketDetail = () => {
                   <Typography>
                     <strong>Assigned Developer(s)</strong>
                   </Typography>
-                  <Typography>{assignedDevelopersArr[0]}</Typography>
+                  <Typography>{assignedDevName[0]}</Typography>
                 </CardContent>
               </Card>
               <Card square elevation={3} className={classes.cardRoot}>
