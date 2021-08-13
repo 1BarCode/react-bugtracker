@@ -3,10 +3,15 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore } from "redux-persist";
 
-import { persistedReducer } from "../reducers";
+import { rootReducer, persistedReducer } from "../reducers";
 
 export const store = createStore(
   persistedReducer,
+  composeWithDevTools(compose(applyMiddleware(thunk)))
+);
+
+export const normStore = createStore(
+  rootReducer,
   composeWithDevTools(compose(applyMiddleware(thunk)))
 );
 
