@@ -1,12 +1,30 @@
 import mongoose from "mongoose";
 import Ticket from "../models/ticket.js";
 import User from "../models/user.js";
+import Comment from "../models/comment.js";
 
 export const getTickets = async (req, res) => {
   try {
     const tickets = await Ticket.find();
 
     res.status(202).json(tickets);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getOneTicket = async (req, res) => {
+  try {
+    const { id: _id } = req.params;
+
+    const respTicket = await Ticket.findById(_id)
+      .populate("assignedDevelopers")
+      .populate("submitter")
+      // .populate("comment")
+      .exec();
+
+    console.log(respTicket);
+    res.json(respTicket);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -45,7 +63,7 @@ export const createTicket = async (req, res) => {
 
 export const updateTicket = async (req, res) => {
   const { id: _id } = req.params;
-  const userId = req.userId;
+  // const userId = req.userId;
   const ticket = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(_id)) {

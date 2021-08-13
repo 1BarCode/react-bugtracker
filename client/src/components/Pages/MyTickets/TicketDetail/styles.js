@@ -26,10 +26,10 @@ export default makeStyles((theme) => ({
     padding: theme.spacing(1, 0, 1, 0),
   },
   edit: {
-    margin: theme.spacing(2, 1, 1),
+    margin: theme.spacing(2, 0, 1),
   },
   back: {
-    margin: theme.spacing(2, 1, 1),
+    margin: theme.spacing(1, 0, 1),
   },
   pageTitle: {
     margin: theme.spacing(0, 0, 3),

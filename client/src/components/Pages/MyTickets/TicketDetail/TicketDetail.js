@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Paper,
@@ -8,23 +8,42 @@ import {
   CardContent,
   Button,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
 import useStyles from "./styles";
 import moment from "moment";
+import { getOneTicket } from "../../../../redux/actions/tickets";
 
 const TicketDetail = () => {
   const classes = useStyles();
   const { id: _id } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const ticket = useSelector((state) =>
     state.tickets.filter((ticket) => (_id ? ticket._id === _id : null))
   );
 
-  console.log(_id);
-  console.log(ticket[0]);
+  const assignedDevelopersArr = useSelector((state) =>
+    state.tickets.filter((ticket) => (_id ? ticket._id === _id : null))
+  )[0].assignedDevelopers;
+
+  const assignedDevName = [...assignedDevelopersArr].map((dev) => dev.name);
+  //   console.log(assignedDevName);
+
+  //   const renderAssignedDev = assignedDevelopersArr.map();
+  //   console.log(assignedDevelopersArr);
+
+  useEffect(() => {
+    const fetchOneTicket = async () => {
+      await dispatch(getOneTicket(_id));
+    };
+    fetchOneTicket();
+  }, []);
+
+  //   console.log(ticket);
+  //   console.log(_id);
 
   return (
     <div className={classes.divRoot}>
@@ -49,7 +68,7 @@ const TicketDetail = () => {
                   <Typography>
                     <strong>Assigned Developer(s)</strong>
                   </Typography>
-                  <Typography>{ticket[0]?.assignedDevelopers[0]}</Typography>
+                  <Typography>{assignedDevName[0]}</Typography>
                 </CardContent>
               </Card>
               <Card square elevation={3} className={classes.cardRoot}>
@@ -108,19 +127,21 @@ const TicketDetail = () => {
               </Card>
               <Button
                 variant="contained"
-                color="secondary"
-                className={classes.back}
-                onClick={() => history.goBack()}
-              >
-                Back
-              </Button>
-              <Button
-                variant="contained"
                 color="primary"
                 className={classes.edit}
+                fullWidth
                 onClick={() => history.push(`/ticket/edit/${_id}`)}
               >
                 Edit
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.back}
+                fullWidth
+                onClick={() => history.goBack()}
+              >
+                Back
               </Button>
             </Grid>
           </Grid>

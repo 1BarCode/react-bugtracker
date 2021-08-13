@@ -24,6 +24,8 @@ export const signUp = (formData) => API.post("/user/signup", formData);
 
 export const getTickets = () => API.get("/tickets");
 
+export const getOneTicket = (ticketId) => API.get(`/tickets/${ticketId}`);
+
 export const createTicket = (ticketData) => API.post("/tickets", ticketData);
 
 export const updateTicket = (ticketId, ticketData) =>
