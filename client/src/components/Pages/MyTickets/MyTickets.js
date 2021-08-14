@@ -29,6 +29,7 @@ const MyTickets = ({ user }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const fetchedTickets = useSelector((state) => state.tickets);
+  const [infoReady, setInfoReady] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -78,6 +79,7 @@ const MyTickets = ({ user }) => {
   useEffect(() => {
     const loadTickets = async () => {
       await dispatch(getTickets());
+      setInfoReady(true);
     };
     loadTickets();
   }, [dispatch]);
@@ -93,7 +95,7 @@ const MyTickets = ({ user }) => {
         ticket.status,
         ticket.type,
         ticket.createdAt,
-        { Edit: "Edit/Assign", Details: "Details" }
+        { Edit: "Edit", Details: "Details" }
       );
       return formattedTicket;
     });
@@ -164,6 +166,10 @@ const MyTickets = ({ user }) => {
         </TableRow>
       );
     });
+
+  if (!infoReady) {
+    return null;
+  }
 
   return (
     <div className={classes.divRoot}>

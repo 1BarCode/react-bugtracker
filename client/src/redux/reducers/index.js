@@ -14,6 +14,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["auth", "tickets"],
+  // blacklist: ["tickets"],
 };
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

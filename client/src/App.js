@@ -9,6 +9,7 @@ import Dashboard from "./components/Pages/Dashboard/Dashboard";
 import ManageRole from "./components/Pages/ManageRole/ManageRole";
 import ManageProjectUsers from "./components/Pages/ManageProjectUsers/ManageProjectUsers";
 import MyProjects from "./components/Pages/MyProjects/MyProjects";
+import NewProject from "./components/Pages/MyProjects/NewProject/NewProject";
 import MyTickets from "./components/Pages/MyTickets/MyTickets";
 import Profile from "./components/Pages/Profile/Profile";
 import NewTicket from "./components/Pages/MyTickets/NewTicket/NewTicket";
@@ -20,11 +21,6 @@ const App = () => {
   const userStorage = JSON.parse(localStorage.getItem("profile"));
   const [user, setUser] = useState(userStorage);
   const isAuth = loggedUser || Boolean(user);
-
-  // console.log(`user from redux: ${loggedUser}`);
-  // console.log(`user storage: ${userStorage}`);
-  // console.log(`user: ${user}`);
-  // console.log(`is auth: ${isAuth}`);
 
   useEffect(() => {
     setUser(userStorage);
@@ -81,6 +77,15 @@ const App = () => {
           loggedIn={isAuth}
         >
           <MyProjects />
+        </ProtectedRoute>
+
+        <ProtectedRoute
+          exact
+          path="/project/new"
+          redirectPath="/auth"
+          loggedIn={isAuth}
+        >
+          <NewProject />
         </ProtectedRoute>
 
         <ProtectedRoute

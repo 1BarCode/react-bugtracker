@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Ticket from "../models/ticket.js";
 import User from "../models/user.js";
 import Comment from "../models/comment.js";
+import Project from "../models/project.js";
 
 export const getTickets = async (req, res) => {
   try {
@@ -63,7 +64,6 @@ export const createTicket = async (req, res) => {
 
 export const updateTicket = async (req, res) => {
   const { id: _id } = req.params;
-  // const userId = req.userId;
   const ticket = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(_id)) {

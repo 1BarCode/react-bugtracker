@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Paper,
@@ -20,6 +20,7 @@ const TicketDetail = () => {
   const { id: _id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
+  const [infoReady, setInfoReady] = useState(false);
 
   const ticket = useSelector((state) =>
     state.tickets.filter((ticket) => (_id ? ticket._id === _id : null))
@@ -33,18 +34,19 @@ const TicketDetail = () => {
   //   console.log(assignedDevName);
 
   //   const renderAssignedDev = assignedDevelopersArr.map();
-  //   console.log(assignedDevelopersArr);
+  // console.log(assignedDevelopersArr);
 
   useEffect(() => {
     const fetchOneTicket = async () => {
       await dispatch(getOneTicket(_id));
+      setInfoReady(true);
     };
     fetchOneTicket();
   }, []);
 
-  //   console.log(ticket);
-  //   console.log(_id);
-
+  if (!infoReady) {
+    return null;
+  }
   return (
     <div className={classes.divRoot}>
       <Container className={classes.content}>
@@ -69,6 +71,13 @@ const TicketDetail = () => {
                     <strong>Assigned Developer(s)</strong>
                   </Typography>
                   <Typography>{assignedDevName[0]}</Typography>
+                  {/* <Typography>{assignedDevelopersArr}</Typography> */}
+                  {/* <Typography>
+                    {ticket[0]?.assignedDevelopers[0]._id
+                      ? ticket[0]?.assignedDevelopers[0]._id
+                      : null}
+                  </Typography> */}
+                  {/* <Typography>{ticket[0]?.priority}</Typography> */}
                 </CardContent>
               </Card>
               <Card square elevation={3} className={classes.cardRoot}>

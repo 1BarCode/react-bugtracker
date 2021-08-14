@@ -11,4 +11,13 @@ export default makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
+  buttonRoot: {
+    marginBottom: theme.spacing(2),
+  },
+  paper: {
+    width: "100%",
+  },
+  tableContainer: {
+    maxHeight: 440,
+  },
 }));
