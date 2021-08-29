@@ -23,7 +23,7 @@ export default makeStyles((theme) => ({
     display: "flex",
   },
   formControl: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(1),
     minWidth: 120,
     padding: theme.spacing(1, 0, 1, 0),
   },
@@ -39,5 +39,8 @@ export default makeStyles((theme) => ({
   fileBase: {
     width: "100%",
     margin: theme.spacing(1, 0, 1, 0),
+  },
+  description: {
+    margin: theme.spacing(2, 0, 1),
   },
 }));
