@@ -23,8 +23,9 @@ const initialProjectData = {
 
 const NewProject = () => {
   const classes = useStyles();
-  const [projectData, setProjectData] = useState(initialProjectData);
   const history = useHistory();
+  const [projectData, setProjectData] = useState(initialProjectData);
+  // const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setProjectData((projectData) => ({
@@ -39,7 +40,7 @@ const NewProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // await dispatchEvent()
+    // await dispatchEvent(createProject({...projectData}))
     clear();
     history.push("/myprojects");
   };
@@ -79,32 +80,8 @@ const NewProject = () => {
                   fullWidth
                   variant="outlined"
                 />
-                {/* <FormControl
-                  fullWidth
-                  variant="outlined"
-                  className={classes.formControl}
-                >
-                  <InputLabel>Project Status</InputLabel>
-                  <Select name="status" labelId="status-label" id="status">
-                    <MenuItem value="New">
-                      <em>New</em>
-                    </MenuItem>
-                    <MenuItem value="In Progress">In Progress</MenuItem>
-                    <MenuItem value="Completed">Completed</MenuItem>
-                  </Select>
-                </FormControl> */}
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                {/* <TextField
-                  name="description"
-                  label="Description"
-                  value={projectData.description}
-                  onChange={handleChange}
-                  multiline
-                  rows={5}
-                  fullWidth
-                  variant="outlined"
-                /> */}
                 <FormControl
                   fullWidth
                   variant="outlined"
@@ -112,9 +89,7 @@ const NewProject = () => {
                 >
                   <InputLabel>Project Status</InputLabel>
                   <Select name="status" labelId="status-label" id="status">
-                    <MenuItem value="New">
-                      <em>New</em>
-                    </MenuItem>
+                    <MenuItem value="New">New</MenuItem>
                     <MenuItem value="In Progress">In Progress</MenuItem>
                     <MenuItem value="Completed">Completed</MenuItem>
                   </Select>

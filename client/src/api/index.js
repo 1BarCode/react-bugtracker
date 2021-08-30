@@ -18,9 +18,13 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// Auth
+
 export const signIn = (formData) => API.post("/user/signin", formData);
 
 export const signUp = (formData) => API.post("/user/signup", formData);
+
+// Tickets
 
 export const getTickets = () => API.get("/tickets");
 
@@ -30,3 +34,8 @@ export const createTicket = (ticketData) => API.post("/tickets", ticketData);
 
 export const updateTicket = (ticketId, ticketData) =>
   API.patch(`/tickets/${ticketId}`, ticketData);
+
+// Projects
+
+export const createProject = (projectData) =>
+  API.post("/projects", projectData);

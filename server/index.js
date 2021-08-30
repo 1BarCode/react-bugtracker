@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 import userRoutes from "./routes/users.js";
 import ticketRoutes from "./routes/tickets.js";
+import projectRoutes from "./routes/projects.js";
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/user", userRoutes);
 app.use("/tickets", ticketRoutes);
+app.use("/projects", projectRoutes);
 
 app.use("/", (req, res) => {
   res.send("Hello World. You've reached the bug_tracker API.");
