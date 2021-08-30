@@ -2,6 +2,31 @@ import mongoose from "mongoose";
 import Project from "../models/project.js";
 import User from "../models/user.js";
 
+export const getProjects = async (req, res) => {
+  try {
+    const projects = await Project.find();
+
+    res.status(202).json(projects);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getOneProject = async (req, res) => {
+  try {
+    const { id: _id } = req.params;
+
+    const respProject = await Project.findById(_id)
+      .populate("tickets")
+      .populate("developers")
+      .exec();
+
+    res.json(respProject);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const createProject = async (req, res) => {
   const project = req.body;
 

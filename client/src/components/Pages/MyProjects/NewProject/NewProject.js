@@ -12,6 +12,8 @@ import {
   Button,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { createProject } from "../../../../redux/actions/projects";
+import { useDispatch } from "react-redux";
 
 import useStyles from "./styles";
 
@@ -25,7 +27,7 @@ const NewProject = () => {
   const classes = useStyles();
   const history = useHistory();
   const [projectData, setProjectData] = useState(initialProjectData);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setProjectData((projectData) => ({
@@ -40,7 +42,7 @@ const NewProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // await dispatchEvent(createProject({...projectData}))
+    await dispatch(createProject({ ...projectData }));
     clear();
     history.push("/myprojects");
   };
@@ -87,14 +89,21 @@ const NewProject = () => {
                   variant="outlined"
                   className={classes.formControl}
                 >
-                  <InputLabel>Project Status</InputLabel>
-                  <Select name="status" labelId="status-label" id="status">
+                  <InputLabel id="status-label">Project Status</InputLabel>
+                  <Select
+                    name="status"
+                    labelId="status-label"
+                    id="status"
+                    value={projectData.status}
+                    onChange={handleChange}
+                  >
                     <MenuItem value="New">New</MenuItem>
                     <MenuItem value="In Progress">In Progress</MenuItem>
                     <MenuItem value="Completed">Completed</MenuItem>
                   </Select>
                 </FormControl>
                 <Button
+                  type="submit"
                   className={classes.submit}
                   style={{ textTransform: "none" }}
                   color="primary"

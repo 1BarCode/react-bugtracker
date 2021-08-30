@@ -22,8 +22,9 @@ const MyProjects = () => {
   const classes = useStyles();
   const history = useHistory();
   const [infoReady, setInfoReady] = useState(false);
+  const dispatch = useDispatch();
 
-  const solumns = [
+  const columns = [
     { id: "title", label: "Title", minWidth: 150 },
     { id: "projectPriority", label: "Project Priority", minWidth: 150 },
     { id: "projectStatus", label: "Project Status", minWidth: 150 },

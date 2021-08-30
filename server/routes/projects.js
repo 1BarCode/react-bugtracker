@@ -1,18 +1,18 @@
 import express from "express";
 import {
-  //   getProjects,
-  //   getOneProject,
+  getProjects,
+  getOneProject,
   createProject,
-  //   updateProject,
+  updateProject,
 } from "../controllers/project.js";
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
-// router.get("/", auth, getProjects);
-// router.get("/:id", auth, getOneProject);
+router.get("/", auth, getProjects);
+router.get("/:id", auth, getOneProject);
 router.post("/", auth, createProject);
-// router.patch("/:id", auth, updateProjects);
+router.patch("/:id", auth, updateProject);
 // router.delete("/:id", auth, deleteProject);
 
 export default router;
