@@ -15,12 +15,13 @@ import {
   ListItem,
   Button,
 } from "@material-ui/core";
+
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+import { getMyTickets } from "../../../redux/actions/tickets";
 
 import useStyles from "./styles";
-import { getTickets } from "../../../redux/actions/tickets";
+import moment from "moment";
 
 const MyTickets = ({ user }) => {
   const classes = useStyles();
@@ -28,7 +29,7 @@ const MyTickets = ({ user }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const fetchedTickets = useSelector((state) => state.tickets);
+  // const fetchedTickets = useSelector((state) => state.tickets);
   const [infoReady, setInfoReady] = useState(false);
 
   const handleChangePage = (event, newPage) => {
@@ -55,7 +56,7 @@ const MyTickets = ({ user }) => {
     id,
     title,
     // projectName,
-    assignedDeveloper,
+    // assignedDeveloper,
     ticketPriority,
     ticketStatus,
     ticketType,
@@ -66,7 +67,7 @@ const MyTickets = ({ user }) => {
       id,
       title,
       // projectName,
-      assignedDeveloper,
+      // assignedDeveloper,
       ticketPriority,
       ticketStatus,
       ticketType,
@@ -76,29 +77,31 @@ const MyTickets = ({ user }) => {
   };
 
   // FETCH Tickets when visiting route
+  const fetchedTickets = useSelector((state) => state.tickets);
+
   useEffect(() => {
     const loadTickets = async () => {
-      await dispatch(getTickets());
+      await dispatch(getMyTickets());
       setInfoReady(true);
     };
     loadTickets();
   }, [dispatch]);
 
-  const rowsArr = fetchedTickets
-    .filter((ticket) => ticket.assignedDevelopers[0] === user.result._id)
-    .map((ticket) => {
-      const formattedTicket = createData(
-        ticket._id,
-        ticket.title,
-        ticket.assignedDevelopers[0],
-        ticket.priority,
-        ticket.status,
-        ticket.type,
-        ticket.createdAt,
-        { Edit: "Edit", Details: "Details" }
-      );
-      return formattedTicket;
-    });
+  // console.log(fetchedTickets);
+  const rowsArr = fetchedTickets.map((ticket) => {
+    const formattedTicket = createData(
+      ticket._id,
+      ticket.title,
+      // ticket.assignedDevelopers[0],
+      ticket.priority,
+      ticket.status,
+      ticket.type,
+      ticket.createdAt,
+      { Edit: "Edit", Details: "Details" }
+    );
+    return formattedTicket;
+  });
+
   // const rows = [
   //   createData(
   //     1,

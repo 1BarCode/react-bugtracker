@@ -1,10 +1,20 @@
 import {
   CREATE,
-  // FETCH_ALL,
+  FETCH_ALL,
   // UPDATE_POST,
   // FETCH_ONE_TICKET,
 } from "../constants/actionTypes";
 import * as api from "../../api";
+
+export const getProjects = () => async (dispatch) => {
+  try {
+    const { data } = await api.getProjects();
+    console.log(data);
+    dispatch({ type: FETCH_ALL, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export const getOneTicket = (ticketId) => async (dispatch) => {
 //     try {

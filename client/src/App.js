@@ -76,7 +76,7 @@ const App = () => {
           redirectPath="/auth"
           loggedIn={isAuth}
         >
-          <MyProjects />
+          <MyProjects user={user} />
         </ProtectedRoute>
 
         <ProtectedRoute

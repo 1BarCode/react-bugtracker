@@ -30,12 +30,16 @@ export const getTickets = () => API.get("/tickets");
 
 export const getOneTicket = (ticketId) => API.get(`/tickets/${ticketId}`);
 
+export const getMyTickets = () => API.get("/tickets/mytickets");
+
 export const createTicket = (ticketData) => API.post("/tickets", ticketData);
 
 export const updateTicket = (ticketId, ticketData) =>
   API.patch(`/tickets/${ticketId}`, ticketData);
 
 // Projects
+
+export const getProjects = () => API.get("/projects");
 
 export const createProject = (projectData) =>
   API.post("/projects", projectData);

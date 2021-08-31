@@ -7,6 +7,8 @@ import Project from "../models/project.js";
 export const getTickets = async (req, res) => {
   try {
     const tickets = await Ticket.find();
+    // .populate("assignedDevelopers")
+    // .populate("submitter");
 
     res.status(202).json(tickets);
   } catch (error) {
@@ -26,6 +28,16 @@ export const getOneTicket = async (req, res) => {
 
     console.log(respTicket);
     res.json(respTicket);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getMyTickets = async (req, res) => {
+  try {
+    const respUser = await User.findById(req.userId).populate("tickets");
+
+    res.status(202).json(respUser);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
