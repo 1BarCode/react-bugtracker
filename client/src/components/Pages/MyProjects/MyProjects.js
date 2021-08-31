@@ -154,8 +154,8 @@ const MyProjects = ({ user }) => {
           <Typography>New Project</Typography>
         </Button>
         <Paper className={classes.paper} elevation={5}>
-          <TableContainer>
-            <Table>
+          <TableContainer className={classes.tableContainer}>
+            <Table stickyHeader aria-label="My Projects">
               <TableHead>
                 <TableRow>{renderTableHead}</TableRow>
               </TableHead>

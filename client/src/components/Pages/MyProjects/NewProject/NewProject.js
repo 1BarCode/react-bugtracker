@@ -57,7 +57,7 @@ const NewProject = () => {
       <Container className={classes.content}>
         <Paper className={classes.paper} elevation={5}>
           <Typography variant="h6" className={classes.pageTitle}>
-            Create A New Ticket
+            Create A Project
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
@@ -110,7 +110,7 @@ const NewProject = () => {
                   variant="contained"
                   fullWidth
                 >
-                  Submit
+                  Create
                 </Button>
                 <Button
                   className={classes.cancel}
