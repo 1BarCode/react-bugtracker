@@ -80,7 +80,7 @@ const MyProjects = ({ user }) => {
   }, [dispatch]);
 
   const rowsArr = fetchedProjects
-    .filter((project) => project.projectManager._id === user.result._id)
+    .filter((project) => project?.projectManager?._id === user.result._id)
     .map((project) => {
       const formattedProject = createData(
         project._id,
