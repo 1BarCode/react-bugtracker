@@ -4,7 +4,10 @@ import User from "../models/user.js";
 
 export const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find();
+    const projects = await Project.find()
+      .populate("projectManager")
+      .populate("developers")
+      .exec();
 
     res.status(202).json(projects);
   } catch (error) {

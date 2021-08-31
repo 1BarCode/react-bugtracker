@@ -43,20 +43,31 @@ const MyProjects = ({ user }) => {
 
   const columns = [
     { id: "title", label: "Title", minWidth: 150 },
-    // { id: "projectPriority", label: "Project Priority", minWidth: 150 },
     { id: "projectStatus", label: "Project Status", minWidth: 150 },
     { id: "projectManager", label: "Project Manager", minWidth: 150 },
+    { id: "created", label: "Created", minWidth: 150 },
+    { id: "updated", label: "Updated", minWidth: 150 },
+    { id: "action", label: "Action", minWidth: 150 },
   ];
 
   const createData = (
     id,
-    title,
+    name,
     projectStatus,
     projectManager,
     created,
+    updated,
     action
   ) => {
-    return { id, title, projectStatus, projectManager, created, action };
+    return {
+      id,
+      name,
+      projectStatus,
+      projectManager,
+      created,
+      updated,
+      action,
+    };
   };
 
   // FETCH Projects when visiting route
@@ -69,14 +80,15 @@ const MyProjects = ({ user }) => {
   }, [dispatch]);
 
   const rowsArr = fetchedProjects
-    .filter((project) => project.projectManager === user.result._id)
+    .filter((project) => project.projectManager._id === user.result._id)
     .map((project) => {
       const formattedProject = createData(
         project._id,
-        project.title,
+        project.name,
         project.status,
-        project.projectManager,
+        project.projectManager.name,
         project.createdAt,
+        project.updatedAt,
         { Edit: "Edit", Details: "Details" }
       );
       return formattedProject;
@@ -98,11 +110,14 @@ const MyProjects = ({ user }) => {
     .map((row) => {
       return (
         <TableRow key={row.id}>
-          <TableCell>{row.title}</TableCell>
+          <TableCell>{row.name}</TableCell>
           <TableCell>{row.projectStatus}</TableCell>
           <TableCell>{row.projectManager}</TableCell>
           <TableCell>
             {moment(row.created).startOf("minute").fromNow()}
+          </TableCell>
+          <TableCell>
+            {moment(row.updated).startOf("minute").fromNow()}
           </TableCell>
           <TableCell>
             <List>
@@ -138,7 +153,7 @@ const MyProjects = ({ user }) => {
         >
           <Typography>New Project</Typography>
         </Button>
-        <Paper>
+        <Paper className={classes.paper} elevation={5}>
           <TableContainer>
             <Table>
               <TableHead>
