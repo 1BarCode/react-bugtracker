@@ -63,10 +63,10 @@ export const updateProject = async (req, res) => {
 
   try {
     const oldProject = await Project.findById(_id);
-    oldProject.title = project.title;
+    oldProject.name = project.name;
     oldProject.description = project.description;
     oldProject.status = project.status;
-    oldProject.projectManager = project.projectManager;
+    // oldProject.projectManager = project.projectManager;
 
     const updatedProject = await oldProject.save();
 

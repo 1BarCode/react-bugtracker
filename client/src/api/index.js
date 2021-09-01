@@ -45,3 +45,6 @@ export const getOneProject = (projectId) => API.get(`/projects/${projectId}`);
 
 export const createProject = (projectData) =>
   API.post("/projects", projectData);
+
+export const updateProject = (projectId, projectData) =>
+  API.patch(`/projects/${projectId}`, projectData);

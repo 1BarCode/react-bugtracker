@@ -1,9 +1,9 @@
 import {
   CREATE,
   FETCH_ALL,
-  UPDATE_POST,
   FETCH_ONE_TICKET,
   FETCH_MY_TICKET,
+  UPDATE_TICKET,
 } from "../constants/actionTypes";
 
 const ticketReducer = (tickets = [], action) => {
@@ -22,7 +22,7 @@ const ticketReducer = (tickets = [], action) => {
     case CREATE:
       return [...tickets, action.payload];
 
-    case UPDATE_POST:
+    case UPDATE_TICKET:
       return tickets.map((ticket) =>
         ticket._id === action.payload._id ? action.payload : ticket
       );

@@ -2,8 +2,8 @@ import {
   CREATE,
   FETCH_ALL,
   FETCH_MY_TICKET,
-  UPDATE_POST,
   FETCH_ONE_TICKET,
+  UPDATE_TICKET,
 } from "../constants/actionTypes";
 import * as api from "../../api";
 
@@ -49,7 +49,7 @@ export const updateTicket = (ticketId, ticketData) => async (dispatch) => {
   try {
     const { data } = await api.updateTicket(ticketId, ticketData);
 
-    dispatch({ type: UPDATE_POST, payload: data });
+    dispatch({ type: UPDATE_TICKET, payload: data });
   } catch (error) {
     console.log(error);
   }
