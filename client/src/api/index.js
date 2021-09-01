@@ -41,5 +41,7 @@ export const updateTicket = (ticketId, ticketData) =>
 
 export const getProjects = () => API.get("/projects");
 
+export const getOneProject = (projectId) => API.get(`/projects/${projectId}`);
+
 export const createProject = (projectData) =>
   API.post("/projects", projectData);

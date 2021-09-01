@@ -22,6 +22,7 @@ export const getOneProject = async (req, res) => {
     const respProject = await Project.findById(_id)
       .populate("tickets")
       .populate("developers")
+      .populate("projectManager")
       .exec();
 
     res.json(respProject);

@@ -2,7 +2,7 @@ import {
   CREATE,
   FETCH_ALL,
   // UPDATE_POST,
-  // FETCH_ONE_TICKET,
+  FETCH_ONE_PROJECT,
 } from "../constants/actionTypes";
 import * as api from "../../api";
 
@@ -15,14 +15,15 @@ export const getProjects = () => async (dispatch) => {
   }
 };
 
-// export const getOneTicket = (ticketId) => async (dispatch) => {
-//     try {
-//       const { data } = await api.getOneTicket(ticketId);
-//       dispatch({ type: FETCH_ONE_TICKET, payload: data });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+export const getOneProject = (projectId) => async (dispatch) => {
+  try {
+    const { data } = await api.getOneProject(projectId);
+    console.log(data);
+    dispatch({ type: FETCH_ONE_PROJECT, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const createProject = (projectData) => async (dispatch) => {
   try {

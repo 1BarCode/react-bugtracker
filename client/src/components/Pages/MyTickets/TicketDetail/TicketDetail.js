@@ -10,10 +10,10 @@ import {
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { getOneTicket } from "../../../../redux/actions/tickets";
 
 import useStyles from "./styles";
 import moment from "moment";
-import { getOneTicket } from "../../../../redux/actions/tickets";
 
 const TicketDetail = () => {
   const classes = useStyles();
@@ -42,7 +42,7 @@ const TicketDetail = () => {
       setInfoReady(true);
     };
     fetchOneTicket();
-  }, []);
+  }, [dispatch]);
 
   if (!infoReady) {
     return null;

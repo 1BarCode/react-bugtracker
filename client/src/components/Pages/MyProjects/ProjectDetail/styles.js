@@ -29,7 +29,7 @@ export default makeStyles((theme) => ({
     margin: theme.spacing(2, 0, 1),
   },
   back: {
-    margin: theme.spacing(1, 0, 1),
+    margin: theme.spacing(0, 0, 2),
   },
   pageTitle: {
     margin: theme.spacing(0, 0, 3),
