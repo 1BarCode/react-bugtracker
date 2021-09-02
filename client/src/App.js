@@ -150,7 +150,7 @@ const App = () => {
           redirectPath="/auth"
           loggedIn={isAuth}
         >
-          <Profile />
+          <Profile user={user} />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

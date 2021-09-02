@@ -29,7 +29,6 @@ const MyTickets = ({ user }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  // const fetchedTickets = useSelector((state) => state.tickets);
   const [infoReady, setInfoReady] = useState(false);
 
   const handleChangePage = (event, newPage) => {

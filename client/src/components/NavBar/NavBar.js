@@ -94,8 +94,8 @@ const NavBar = ({ user, setUser }) => {
 
   const drawerButtons = [
     { title: "Dashboard", icon: "DashboardIcon" },
-    { title: "Manage Role", icon: "AssignmentIndIcon" },
-    { title: "Project Users", icon: "GroupAddIcon" },
+    // { title: "Manage Role", icon: "AssignmentIndIcon" },
+    // { title: "Project Users", icon: "GroupAddIcon" },
     { title: "My Projects", icon: "AssignmentIcon" },
     { title: "My Tickets", icon: "ConfirmationNumberIcon" },
     { title: "User Profile", icon: "PersonIcon" },
