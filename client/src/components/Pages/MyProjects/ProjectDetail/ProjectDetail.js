@@ -32,7 +32,7 @@ const ProjectDetail = () => {
       setInfoReady(true);
     };
     fetchOneProject();
-  }, [dispatch]);
+  }, [dispatch, _id]);
 
   if (!infoReady) {
     return null;

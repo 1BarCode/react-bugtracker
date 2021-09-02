@@ -42,7 +42,7 @@ const TicketDetail = () => {
       setInfoReady(true);
     };
     fetchOneTicket();
-  }, [dispatch]);
+  }, [dispatch, _id]);
 
   if (!infoReady) {
     return null;
