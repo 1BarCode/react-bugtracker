@@ -57,6 +57,11 @@ const NavBar = ({ user, setUser }) => {
     setUser(null);
   };
 
+  const handleProfile = () => {
+    history.push("/profile");
+    handleClose();
+  };
+
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
@@ -86,7 +91,7 @@ const NavBar = ({ user, setUser }) => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem>Profile</MenuItem>
+        <MenuItem onClick={handleProfile}>Profile</MenuItem>
         <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
       </Menu>
     </div>

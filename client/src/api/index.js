@@ -1,10 +1,10 @@
 import axios from "axios";
 
-// const deployedURL = "";
+const deployedURL = "https://zen-hive.herokuapp.com/";
+const API = axios.create({ baseURL: deployedURL });
 
-const devURL = "http://localhost:5001";
-
-const API = axios.create({ baseURL: devURL });
+// const devURL = "http://localhost:5001";
+// const API = axios.create({ baseURL: devURL });
 
 // interceptor happen before all request below to send token to backend middleware
 // to verify if user is logged in
